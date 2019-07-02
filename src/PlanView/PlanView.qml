@@ -38,7 +38,7 @@ Item {
     readonly property real  _horizontalMargin:          ScreenTools.defaultFontPixelWidth  * 0.5
     readonly property real  _margin:                    ScreenTools.defaultFontPixelHeight * 0.5
     readonly property real  _radius:                    ScreenTools.defaultFontPixelWidth  * 0.5
-    readonly property real  _rightPanelWidth:           Math.min(parent.width / 3, ScreenTools.defaultFontPixelWidth * 30)
+    readonly property real  _rightPanelWidth:           Math.min(parent.width / 3, ScreenTools.defaultFontPixelWidth * 60)
     readonly property real  _toolButtonTopMargin:       ScreenTools.defaultFontPixelHeight * 0.5
     readonly property var   _defaultVehicleCoordinate:  QtPositioning.coordinate(37.803784, -122.462276)
     readonly property bool  _waypointsOnlyMode:         QGroundControl.corePlugin.options.missionWaypointsOnly
@@ -59,6 +59,7 @@ Item {
     readonly property int       _layerMission:              1
     readonly property int       _layerGeoFence:             2
     readonly property int       _layerRallyPoints:          3
+    readonly property int       _layerCustom:               4
     readonly property string    _armedVehicleUploadPrompt:  qsTr("Vehicle is currently armed. Do you want to upload the mission to the vehicle?")
 
     function addComplexItem(complexItemName) {
@@ -490,7 +491,6 @@ Item {
                 homePosition:           _missionController.plannedHomePosition
                 planView:               true
             }
-
             RallyPointMapVisuals {
                 map:                    editorMap
                 myRallyPointController: _rallyPointController
@@ -742,6 +742,13 @@ Item {
                                     anchors.verticalCenter: parent.verticalCenter
                                     onClicked:      _editingLayer = _layerRallyPoints
                                 }
+                                QGCRadioButton {
+                                    id:             planElementCustom
+                                    text:           qsTr("Custom")
+                                    visible:        QGroundControl.corePlugin.options.enablePlanViewSelector
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    onClicked:      _editingLayer = _layerCustom
+                                }
                             }
                         }
                     }
@@ -800,6 +807,15 @@ Item {
                 myGeoFenceController:   _geoFenceController
                 flightMap:              editorMap
                 visible:                _editingLayer == _layerGeoFence
+            }
+            // Custom Editor
+            GeoFenceEditor {
+                anchors.top:            rallyPointHeader.bottom
+                anchors.topMargin:      ScreenTools.defaultFontPixelHeight * 0.5
+                anchors.bottom:         parent.bottom
+                anchors.left:           parent.left
+                anchors.right:          parent.right
+                visible:                _editingLayer == _layerCustom
             }
             // Rally Point Editor
             RallyPointEditorHeader {
