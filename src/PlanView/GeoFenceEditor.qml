@@ -63,7 +63,7 @@ QGCFlickable {
                     font.pointSize:     myGeoFenceController.supported ? ScreenTools.smallFontPointSize : ScreenTools.defaultFontPointSize
                     text:               myGeoFenceController.supported ?
                                             qsTr("GeoFencing allows you to set a virtual ‘fence’ around the area you want to fly in.") :
-                                            qsTr("Hello, This vehicle does not support GeoFence.")
+                                            qsTr("This vehicle does not support GeoFence.")
                 }
 
                 Column {

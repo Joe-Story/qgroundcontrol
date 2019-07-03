@@ -809,13 +809,13 @@ Item {
                 visible:                _editingLayer == _layerGeoFence
             }
             // Custom Editor
-            GeoFenceEditor {
-                anchors.top:            rallyPointHeader.bottom
+            CustomEditor {
+                anchors.top:            rightControls.bottom
                 anchors.topMargin:      ScreenTools.defaultFontPixelHeight * 0.5
                 anchors.bottom:         parent.bottom
                 anchors.left:           parent.left
                 anchors.right:          parent.right
-                visible:                _editingLayer == _layerCustom
+                visible:                _editingLayer == _layerCustom //True only if the Custom button has been clicked
             }
             // Rally Point Editor
             RallyPointEditorHeader {
