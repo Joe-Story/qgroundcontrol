@@ -768,7 +768,7 @@ Item {
                 QGCListView {
                     id:             missionItemEditorListView
                     anchors.fill:   parent
-                    spacing:        ScreenTools.defaultFontPixelHeight / 4
+                    spacing:        ScreenTools.defaultFontPixelHeight / 4      //Spaces out the Mission Start, Takeoff, Waypoint, etc. tabs
                     orientation:    ListView.Vertical
                     model:          _missionController.visualItems
                     cacheBuffer:    Math.max(height * 2, 0)
